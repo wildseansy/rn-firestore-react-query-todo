@@ -1,6 +1,8 @@
 import firestore from "@react-native-firebase/firestore";
+import { Todo } from "@src/firebase/types";
+import { deleteFromPaginatedCache } from "@src/react-query/cache";
 import { getQueryKey } from "@src/react-query/queryKeys";
-import { useFirestoreCollectionDeleteMutation } from "@src/react-query/useFirestoreCollectionDeleteMutation";
+import { useFirestoreDeleteMutation } from "@src/react-query/useFirestoreDeleteMutation";
 import { invalidateTodoList } from "@src/utils/cache";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -8,11 +10,17 @@ export const useDeleteTodoMutation = () => {
   const collectionRef = firestore().collection("todos");
   const queryClient = useQueryClient();
 
-  return useFirestoreCollectionDeleteMutation({
+  return useFirestoreDeleteMutation({
     collectionRef,
-    queryKey: getQueryKey(["todos", "todoList"]),
     options: {
-      onSuccess: () => {
+      onSuccess: (_, variables) => {
+        deleteFromPaginatedCache<Todo>({
+          queryClient,
+          queryFilters: {
+            queryKey: getQueryKey(["todos", "todoList"]),
+          },
+          shouldDelete: (todo) => todo.id === variables.id,
+        });
         invalidateTodoList(queryClient);
       },
     },

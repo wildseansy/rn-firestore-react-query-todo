@@ -5,34 +5,25 @@ import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { FirestoreError } from "@src/react-query/types";
 
-// Variables requires an id, so we know which document to reference
-type UpdateMutationVariables<D = unknown> = {
-  id: string;
-  updates: Partial<D>;
-};
+type DeleteMutationVariables = { id: string };
 
-export const useFirestoreUpdateMutation = <D = unknown>({
+export const useFirestoreDeleteMutation = ({
   collectionRef,
   options,
 }: {
   collectionRef: FirebaseFirestoreTypes.CollectionReference<FirebaseFirestoreTypes.DocumentData>;
-  options?: UseMutationOptions<
-    void,
-    FirestoreError,
-    UpdateMutationVariables<D>
-  >;
+  options?: UseMutationOptions<void, FirestoreError, DeleteMutationVariables>;
 }) => {
   const mutationFn = useCallback(
-    async ({ id, updates }: UpdateMutationVariables<D>) => {
+    async ({ id: docId }: DeleteMutationVariables) => {
       const result = await firestore().runTransaction(() => {
-        return collectionRef.doc(id).update(updates);
+        return collectionRef.doc(docId).delete();
       });
-
       return result;
     },
     [collectionRef]
   );
-  return useMutation<void, FirestoreError, UpdateMutationVariables<D>>({
+  return useMutation<void, FirestoreError, DeleteMutationVariables>({
     mutationFn,
     ...options,
   });

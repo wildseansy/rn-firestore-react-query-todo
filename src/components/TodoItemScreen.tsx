@@ -13,7 +13,7 @@ export const TodoItemScreen: React.FC = () => {
   useEffect(() => {
     setOptions({ title: data?.data.title });
   }, [data]);
-  const updateTodoMutation = useUpdateTodoMutation({ id: params.id });
+  const updateTodoMutation = useUpdateTodoMutation();
   const deleteTodoMutation = useDeleteTodoMutation();
   return (
     <View style={styles.container}>
@@ -24,7 +24,12 @@ export const TodoItemScreen: React.FC = () => {
         <Button
           title={data?.data.isDone ? "Set to incomplete" : "Complete task"}
           onPress={() => {
-            updateTodoMutation.mutate({ isDone: !data?.data.isDone });
+            updateTodoMutation.mutate({
+              id: params.id,
+              updates: {
+                isDone: !data?.data.isDone,
+              },
+            });
           }}
         />
         <Button
