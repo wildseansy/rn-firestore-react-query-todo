@@ -33,6 +33,7 @@ export function useFirestoreQuery<D = unknown>(
       const result: FirestoreQueryResult<D> = {
         data: deserializedData,
         snapshot,
+        id: snapshot.id,
       };
       return result;
     } catch (e) {

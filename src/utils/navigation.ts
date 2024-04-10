@@ -2,10 +2,10 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 
 export type RootLoggedInRoutes = {
   TodoList: undefined;
+  CreateTodo: undefined;
   TodoItem: {
     id: string;
   };
-  CreateTodo: undefined;
 };
 
 export type RootUseNavigation<K extends keyof RootLoggedInRoutes> =

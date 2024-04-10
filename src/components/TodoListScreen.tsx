@@ -64,7 +64,7 @@ export const TodoListScreen: React.FC = () => {
         renderItem={({ item }) => {
           return (
             <TodoItem
-              todo={item}
+              todo={item.data}
               onPress={() => navigate("TodoItem", { id: item.id })}
             />
           );

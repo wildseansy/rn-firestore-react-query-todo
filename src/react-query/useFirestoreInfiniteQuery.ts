@@ -53,7 +53,7 @@ export function useFirestoreInfiniteQuery<D extends { id: string }>(
         data: snapshot.docs.map((doc) => {
           const deserializedData: D = doc.data() as D;
           return {
-            ...deserializedData,
+            data: deserializedData,
             id: doc.id,
           };
         }),

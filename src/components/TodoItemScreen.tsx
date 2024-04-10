@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import {
+  StyleSheet,
+  ActivityIndicator,
+  Text,
+  View,
+  Button,
+} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RootUseNavigation, RootUseRoute } from "@src/utils/navigation";
 import { useEffect } from "react";
@@ -32,14 +38,24 @@ export const TodoItemScreen: React.FC = () => {
             });
           }}
         />
-        <Button
-          title={"Delete task"}
-          color="red"
-          onPress={() => {
-            deleteTodoMutation.mutate({ id: params.id });
-            goBack();
-          }}
-        />
+        {deleteTodoMutation.isPending ? (
+          <ActivityIndicator style={{ height: 40 }} />
+        ) : (
+          <Button
+            title={"Delete task"}
+            color="red"
+            onPress={() => {
+              deleteTodoMutation.mutate(
+                { id: params.id },
+                {
+                  onSuccess: () => {
+                    goBack();
+                  },
+                }
+              );
+            }}
+          />
+        )}
       </View>
     </View>
   );

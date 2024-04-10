@@ -1,17 +1,19 @@
 import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
-import {
-  InfiniteData,
-  UseBaseQueryResult,
-  UseInfiniteQueryResult,
-} from "@tanstack/react-query";
+import { InfiniteData, UseBaseQueryResult } from "@tanstack/react-query";
 export type PageParam =
   | FirebaseFirestoreTypes.Query<FirebaseFirestoreTypes.DocumentData>
   | undefined;
 
 export type FirestoreError = unknown;
+
+export type FirestoreWrappedData<D = unknown> = {
+  id: string;
+  data: D;
+};
+
 export type FirestoreInfiniteQueryPage<D = unknown> = {
   snapshot?: FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
-  data: D[];
+  data: FirestoreWrappedData[];
 };
 
 export type PaginatedResponse<T> = InfiniteData<
@@ -21,8 +23,7 @@ export type PaginatedResponse<T> = InfiniteData<
 
 export type FirestoreQueryResult<D = unknown> = {
   snapshot?: FirebaseFirestoreTypes.DocumentSnapshot<FirebaseFirestoreTypes.DocumentData>;
-  data: D;
-};
+} & FirestoreWrappedData<D>;
 
 export type UseFirestoreQueryResult<D = unknown> = UseBaseQueryResult<
   FirestoreQueryResult<D>

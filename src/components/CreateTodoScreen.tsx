@@ -1,31 +1,12 @@
 import { StyleSheet, Button, TextInput } from "react-native";
 import firestore from "@react-native-firebase/firestore";
-import { getQueryKey } from "@src/react-query/queryKeys";
-import { useFirestoreCollectionAddMutation } from "@src/react-query/useFirestoreCollectionAddMutation";
 import { useCallback, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { RootUseNavigation } from "@src/utils/navigation";
-import { Todo } from "@src/firebase/types";
 import { useQueryClient } from "@tanstack/react-query";
+import { useCreateTodoMutation } from "@src/hooks/useCreateTodoMutation";
 
-const useCreateTodoMutation = () => {
-  const collectionRef = firestore().collection("todos");
-  const queryClient = useQueryClient();
-  return useFirestoreCollectionAddMutation<Todo>({
-    collectionRef,
-    queryKey: getQueryKey(["todos", "todoList"]),
-    cachePosition: "end",
-    options: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: getQueryKey(["todos", "listSize"]),
-          exact: true,
-        });
-      },
-    },
-  });
-};
 export const CreateTodoScreen: React.FC = () => {
   const [todoTitle, setTodoTitle] = useState("");
   const mutation = useCreateTodoMutation();
