@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string></string>
+	<string>343419218276-86l7ego2mb112lrd23h5omui9p7b96fh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string></string>
+	<string>com.googleusercontent.apps.343419218276-86l7ego2mb112lrd23h5omui9p7b96fh</string>
 	<key>API_KEY</key>
-	<string></string>
+	<string>AIzaSyBix-Bmk-gK34BWFwq6eXZHl-V9M53lApc</string>
 	<key>GCM_SENDER_ID</key>
-	<string></string>
+	<string>343419218276</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.todoapp</string>
+	<string>com.wildseansy</string>
 	<key>PROJECT_ID</key>
-	<string>todoapp-2-c5bd3</string>
+	<string>todoapp-434d5</string>
 	<key>STORAGE_BUCKET</key>
-	<string>todoapp-2-c5bd3.appspot.com</string>
+	<string>todoapp-434d5.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string></string>
+	<string>1:343419218276:ios:e69296dad82afa3a99b271</string>
 </dict>
 </plist>

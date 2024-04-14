@@ -1,6 +1,7 @@
 import { QueryClient, QueryFilters, QueryKey } from "@tanstack/query-core";
 import {
   FirestoreQueryResult,
+  FirestoreWrappedData,
   PaginatedResponse,
 } from "@src/react-query/types";
 
@@ -90,7 +91,7 @@ export const deleteFromPaginatedCache = <I>({
 }: {
   queryClient: QueryClient;
   queryFilters: QueryFilters;
-  shouldDelete: (cacheEntry: I) => boolean;
+  shouldDelete: (cacheEntry: FirestoreWrappedData<I>) => boolean;
 }) => {
   return queryClient.setQueriesData<PaginatedResponse<I>>(
     queryFilters,

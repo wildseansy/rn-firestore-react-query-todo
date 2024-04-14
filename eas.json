@@ -7,7 +7,7 @@
     "development-simulator": {
       "developmentClient": true,
       "env": {
-        "EXPO_FIREBASE_CLIENT_ID": ""
+        "EXPO_FIREBASE_CLIENT_ID": "343419218276-86l7ego2mb112lrd23h5omui9p7b96fh.apps.googleusercontent.com"
       },
       "distribution": "internal",
       "ios": {

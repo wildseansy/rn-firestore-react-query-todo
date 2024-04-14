@@ -13,7 +13,7 @@ export type FirestoreWrappedData<D = unknown> = {
 
 export type FirestoreInfiniteQueryPage<D = unknown> = {
   snapshot?: FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
-  data: FirestoreWrappedData[];
+  data: FirestoreWrappedData<D>[];
 };
 
 export type PaginatedResponse<T> = InfiniteData<
